@@ -75,9 +75,9 @@ def download(url, module_name, md5sum, save_name=None):
     if not os.path.exists(dirname):
         os.makedirs(dirname)
 
-    filename = os.path.join(
-        dirname, url.split('/')[-1] if save_name is None else save_name
-    )
+    save_name = url.split('/')[-1] if save_name is None else save_name
+    save_name = save_name.replace('\\', '').replace('/', '')
+    filename = os.path.join(dirname, save_name)
 
     if os.path.exists(filename) and md5file(filename) == md5sum:
         return filename
